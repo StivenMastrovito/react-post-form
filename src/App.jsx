@@ -1,17 +1,15 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-
+import Form from './components/Form'
 const initialBlogForm = {
-  author: "",
-  title: "",
-  body: "",
-  public: false,
-}
+        author: "",
+        title: "",
+        body: "",
+        public: false,
+    }
 
 function App() {
-  const [formDate, setFormDate] = useState(initialBlogForm);
+
   const [blogs, setBlogs] = useState([{
     author: "Stiven",
     title: "come non sviluppare",
@@ -26,26 +24,7 @@ function App() {
   }
   ]);
 
-  const [active, setActive] = useState(false)
-
-  function aggiornaForm(event) {
-    const key = event.target.name;
-    setFormDate({
-      ...formDate,
-      [key]: event.target.type === "checkbox" ? event.target.checked : event.target.value,
-    })
-  }
-
-  function annulla(){
-    console.log("annulla");
-    
-    setActive(!active);
-    setFormDate(initialBlogForm);
-  }
-
-  function addBlog(event) {
-    console.log("submit");
-    
+  function addBlog(event, formDate, setFormDate, setActive, active) {
     event.preventDefault();
     setBlogs([...blogs, formDate]);
     setFormDate(initialBlogForm);
@@ -56,31 +35,10 @@ function App() {
   return (
     <>
       <h1>BLOG</h1>
-      <form action="" onSubmit={addBlog}>
-        <div>
-          <label htmlFor="author">Autore:</label>
-          <input required type="text" name='author' id='author' value={formDate.author} onChange={aggiornaForm} />
-        </div>
-        <div>
-          <label htmlFor="title">Titolo:</label>
-          <input required type="text" name='title' id='title' value={formDate.title} onChange={aggiornaForm} />
-        </div>
-        <div className='align_top flex' >
-          <label htmlFor="body">Descrizione:</label>
-          <textarea className='flex' required type="text-area" name="body" id="body" value={formDate.body} onChange={aggiornaForm} />
-        </div>
+      <Form 
+      addBlog = {addBlog}
+      />
 
-        <label htmlFor="public">Vuoi pubblicarlo online?</label>
-        <input type="checkbox" name="public" id="public" checked={formDate.public} onChange={aggiornaForm} />
-        {!active && <button onClick={() => setActive(!active)} className='btn btn_blue'>PUBBLICA</button>}
-        {active && <div>
-          <h3>Sei sicuro di voler pubblicare?</h3>
-          <button className='btn btn_yellow' onClick={annulla}>ANNULLA</button>
-          <button className='btn btn_blue' type='submit'>PUBBLICA</button>
-        </div>
-        }
-        
-      </form>
       <div className="grid">
         {blogs.map((blog, index) => (
           <div key={index} className={`col ${blog.public ? "border_green" : "border_yellow"}`}>
