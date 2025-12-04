@@ -1,15 +1,13 @@
 import { useState } from "react";
 import Input from "./Input";
-
-
-export default function Form({addBlog}) {
-    const initialBlogForm = {
+const initialBlogForm = {
         author: "",
         title: "",
         body: "",
         public: false,
     }
 
+export default function Form({addBlog}) {
     const [formDate, setFormDate] = useState(initialBlogForm);
     const [active, setActive] = useState(false)
 
