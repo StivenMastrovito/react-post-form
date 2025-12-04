@@ -6,6 +6,7 @@ const initialBlogForm = {
         title: "",
         body: "",
         public: false,
+        image: ""
     }
 
 function App() {
@@ -15,13 +16,23 @@ function App() {
     title: "come non sviluppare",
     body: "Imparate da loris",
     public: true,
+    image: ""
   },
   {
     author: "Loris",
     title: "BOh",
     body: "BOh Boh BOg BOgBogfosodfsdasfdfsdfsdfdfsd",
     public: false,
-  }
+    image: ""
+  },
+  {
+    author: "Samuel",
+    title: "Mio salvatore del 04-12-2025",
+    body: "Oggi ti ho assillato",
+    public: true,
+    image: ""
+  },
+  
   ]);
 
   function addBlog(event, formDate, setFormDate, setActive, active) {
@@ -35,9 +46,7 @@ function App() {
   return (
     <>
       <h1>BLOG</h1>
-      <Form 
-      addBlog = {addBlog}
-      />
+      <Form addBlog = {addBlog}/>
 
       <div className="grid">
         {blogs.map((blog, index) => (
@@ -48,6 +57,8 @@ function App() {
             <div>
               <p><strong>Descrizione:</strong></p>
               <p>{blog.body}</p>
+              {blog.image !== "" && <img src={blog.image} alt="" />}
+              
             </div>
           </div>
         ))}

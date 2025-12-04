@@ -57,19 +57,31 @@ export default function Form({addBlog}) {
                     className="flex"
                 />
             </div>
-            <Input
+            <div>
+               <Input
                 formDate={formDate.public}
                 type="checkbox"
                 name="public"
                 aggiornaForm={aggiornaForm}
                 className=""
-            />
-            {!active && <button onClick={() => setActive(!active)} className='btn btn_blue'>PUBBLICA</button>}
-            {active && <div>
+            /> 
+            </div>
+            <div>
+                <Input 
+                formDate={formDate.image}
+                type="text"
+                name="image"
+                aggiornaForm={aggiornaForm}
+                className=""
+                />
+            </div>
+            {active ? <div>
                 <h3>Sei sicuro di voler pubblicare?</h3>
                 <button className='btn btn_yellow' onClick={annulla}>ANNULLA</button>
                 <button className='btn btn_blue' type='submit'>PUBBLICA</button>
             </div>
+            : 
+            <button onClick={() => setActive(!active)} className='btn btn_blue'>PUBBLICA</button>
             }
         </form>
     )

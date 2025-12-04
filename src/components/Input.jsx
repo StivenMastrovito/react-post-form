@@ -3,7 +3,7 @@ export default function Input({ formDate, type, name, aggiornaForm, className}) 
     let infoValue = ""
     let infoChecked = ""
     control ? infoValue = formDate : infoChecked = formDate
-    let label = name === "title" ? "Titolo:" : (name === "author" ? "Autore:" : (name === "body" ? "Descrizione: " : "Vuoi pubblicarlo online? "))
+    let label = name === "title" ? "Titolo:" : (name === "author" ? "Autore:" : (name === "body" ? "Descrizione: " : (name === "image" ? "Inserisci un immagine" : "Vuoi pubblicarlo online? ")))
     
     return (
         <>
