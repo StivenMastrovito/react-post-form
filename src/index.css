@@ -43,11 +43,15 @@ textarea {
   padding: 10px 15px;
   border-radius: 10px;
   border: 1px solid gray;
+  margin-right: 10px;
 }
 
 .btn_blue{
   background-color: rgb(78, 78, 255);
   color: white;
+}
+.btn_yellow{
+  background-color: yellow;
 }
 
 .grid{

@@ -18,13 +18,15 @@ function App() {
     body: "Imparate da loris",
     public: true,
   },
-{
+  {
     author: "Loris",
     title: "BOh",
     body: "BOh Boh BOg BOgBogfosodfsdasfdfsdfsdfdfsd",
     public: false,
   }
-]);
+  ]);
+
+  const [active, setActive] = useState(false)
 
   function aggiornaForm(event) {
     const key = event.target.name;
@@ -34,10 +36,20 @@ function App() {
     })
   }
 
+  function annulla(){
+    console.log("annulla");
+    
+    setActive(!active);
+    setFormDate(initialBlogForm);
+  }
+
   function addBlog(event) {
+    console.log("submit");
+    
     event.preventDefault();
     setBlogs([...blogs, formDate]);
     setFormDate(initialBlogForm);
+    setActive(!active)
   }
 
 
@@ -60,12 +72,18 @@ function App() {
 
         <label htmlFor="public">Vuoi pubblicarlo online?</label>
         <input type="checkbox" name="public" id="public" checked={formDate.public} onChange={aggiornaForm} />
-
-        <button className='btn btn_blue' type='submit'>PUBBLICA</button>
+        {!active && <button onClick={() => setActive(!active)} className='btn btn_blue'>PUBBLICA</button>}
+        {active && <div>
+          <h3>Sei sicuro di voler pubblicare?</h3>
+          <button className='btn btn_yellow' onClick={annulla}>ANNULLA</button>
+          <button className='btn btn_blue' type='submit'>PUBBLICA</button>
+        </div>
+        }
+        
       </form>
       <div className="grid">
-        {blogs.map((blog) => (
-          <div className={`col ${blog.public ? "border_green" : "border_yellow"}`}>
+        {blogs.map((blog, index) => (
+          <div key={index} className={`col ${blog.public ? "border_green" : "border_yellow"}`}>
             <div className='flex'>
               <p>{blog.title} - <span className='text_gray'>{blog.author}</span></p>
             </div>
@@ -73,7 +91,6 @@ function App() {
               <p><strong>Descrizione:</strong></p>
               <p>{blog.body}</p>
             </div>
-
           </div>
         ))}
 
